@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "serversideadditions",
+  "version": "${version}",
+  "name": "ServerSideAdditions",
+  "description": "A set of server-side quality of life and utility additions.",
+  "authors": [
+    "mel (https://github.com/McMelonTV)"
+  ],
+  "contact": {
+    "homepage": ""
+  },
+  "license": "MIT",
+  "icon": "assets/serversideadditions/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "ing.boykiss.serversideadditions.fabric.ServerSideAdditionsFabric"
+    ],
+    "client": [
+      "ing.boykiss.serversideadditions.fabric.client.ServerSideAdditionsFabricClient"
+    ]
+  },
+  "mixins": [
+    "serversideadditions.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.16.14",
+    "minecraft": "~1.21.5",
+    "java": ">=21",
+    "architectury": ">=16.1.4",
+    "fabric-api": "*"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}
