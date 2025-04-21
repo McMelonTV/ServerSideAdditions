@@ -12,13 +12,10 @@
   },
   "license": "MIT",
   "icon": "assets/serversideadditions/icon.png",
-  "environment": "*",
+  "environment": "server",
   "entrypoints": {
     "main": [
       "ing.boykiss.serversideadditions.fabric.ServerSideAdditionsFabric"
-    ],
-    "client": [
-      "ing.boykiss.serversideadditions.fabric.client.ServerSideAdditionsFabricClient"
     ]
   },
   "mixins": [
