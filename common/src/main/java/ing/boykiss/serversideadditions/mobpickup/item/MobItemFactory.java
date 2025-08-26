@@ -10,6 +10,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.ProblemReporter;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.Brain;
@@ -21,13 +22,19 @@ import net.minecraft.world.entity.npc.VillagerType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Rarity;
-import net.minecraft.world.item.component.*;
+import net.minecraft.world.item.component.CustomData;
+import net.minecraft.world.item.component.ItemLore;
+import net.minecraft.world.item.component.ResolvableProfile;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.item.trading.MerchantOffers;
+import net.minecraft.world.level.storage.TagValueOutput;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class MobItemFactory {
@@ -154,9 +161,10 @@ public class MobItemFactory {
         mobItemData.putString("SSA_mobItem_entityType", entityTypeId);
         itemStack.set(DataComponents.CUSTOM_DATA, CustomData.of(mobItemData));
 
-        CompoundTag entityData = new CompoundTag();
+        entity.getPickResult();
+        TagValueOutput entityData = TagValueOutput.createWithoutContext(ProblemReporter.DISCARDING);
         entity.save(entityData);
-        itemStack.set(DataComponents.ENTITY_DATA, CustomData.of(entityData));
+        itemStack.set(DataComponents.ENTITY_DATA, CustomData.of(entityData.buildResult()));
 
         return itemStack;
     }
