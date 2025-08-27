@@ -20,6 +20,7 @@ import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.TagValueInput;
 import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.phys.Vec3;
 
 public class MobItemPlaceEvent implements InteractionEvent.RightClickBlock {
     @Override
@@ -52,7 +53,10 @@ public class MobItemPlaceEvent implements InteractionEvent.RightClickBlock {
             Entity entity = entityType.create(level, EntitySpawnReason.BUCKET);
             if (entity == null) return InteractionResult.PASS;
             entity.load(entityDataInput);
-            entity.setPos(blockPos.getX() + direction.getStepX() + 0.5, blockPos.getY() + direction.getStepY(), blockPos.getZ() + direction.getStepZ() + 0.5);
+
+            Vec3 entityPos = blockPos.relative(direction).getBottomCenter();
+            entity.setPos(entityPos);
+
             if (itemStack.has(DataComponents.CUSTOM_NAME)) {
                 Component customName = itemStack.get(DataComponents.CUSTOM_NAME);
                 entity.setCustomName(customName);
